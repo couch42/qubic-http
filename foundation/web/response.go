@@ -38,6 +38,7 @@ func Respond(ctx context.Context, w http.ResponseWriter, data interface{}, statu
 
 	// Set the CORS headers to allow all origins.
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
 
 	// Write the status code to the response.
 	w.WriteHeader(statusCode)

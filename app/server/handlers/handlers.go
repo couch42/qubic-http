@@ -35,6 +35,9 @@ func New(shutdown chan os.Signal, log *log.Logger, pool *nodes.Pool, osclient *o
 	sh := statusHandler{opensearchClient: osclient}
 	app.Handle(http.MethodGet, "/v1/status", sh.GetStatus)
 
+	// add CORS headers to all OPTIONS method requests
+	oh := optionsHandler{opensearchClient: osclient}
+	app.Handle(http.MethodOptions, "/*", oh.SetCorsHeader)
 
 	return app
 }
